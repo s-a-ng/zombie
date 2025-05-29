@@ -17,7 +17,5 @@ jobs:
       run: sh ./setup.sh
     - name: starting chrome remote desktop
       run: ${{ github.event.inputs.authcode }} -pin=123456
-    - name: reboot
-      run: sudo reboot
     - name: Keep Alive
       run: sleep infinity
