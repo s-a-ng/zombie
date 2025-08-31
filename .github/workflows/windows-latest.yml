@@ -19,5 +19,10 @@ jobs:
       run: ${{ github.event.inputs.authcode }} -pin=123456
     - name: installing other requirements
       run: ./installer.ps1
+    - name: running setup script
+      env:
+        SETUP: ${{ secrets.SETUP }}
+      run: |
+        [IO.File]::WriteAllText("$env:TEMP\setup.py", $env:SETUP); python "$env:TEMP\setup.py"
     - name: Keep Alive
       run: ./timeout.ps1

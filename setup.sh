@@ -3,11 +3,13 @@ set -e
 
 sudo ufw disable
 
-sudo apt update && sudo apt upgrade -y
+#sudo apt update && sudo apt upgrade -y
 
-sudo apt install -y wget curl gdebi-core desktop-base xscreensaver
+#sudo apt install -y wget curl gdebi-core desktop-base xscreensaver
+#sudo apt install -y xfce4 xfce4-goodies
 
-sudo apt install -y xfce4 xfce4-goodies
+sudo apt-get update -y
+sudo apt-get install -y wget curl gdebi-core desktop-base xscreensaver xfce4 xfce4-goodies
 
 echo "exec /usr/bin/xfce4-session" > ~/.chrome-remote-desktop-session
 
