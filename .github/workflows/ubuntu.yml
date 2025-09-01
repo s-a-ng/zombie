@@ -16,10 +16,6 @@ jobs:
       run: sh ./setup.sh 
     - name: starting chrome remote desktop
       run: ${{ github.event.inputs.authcode }} -pin=123456
-    - name: setup container
-      env:
-        PAT: ${{ secrets.PAT}}
-      run: sh ./setup_container.sh
     - name: Maximize build space
       uses: easimon/maximize-build-space@master
       with:
