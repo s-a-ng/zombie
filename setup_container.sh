@@ -26,7 +26,7 @@ EOF
 
 git clone https://s-a-ng:${PAT}@github.com/s-a-ng/bot-pool.git
 
-docker run -it --rm \
+docker run --rm \
   --name windows \
   -p 8006:8006 \
   --device=/dev/kvm \
