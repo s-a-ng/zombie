@@ -21,11 +21,12 @@ echo start /wait "" "RobloxPlayerInstaller.exe" >> "%APPDATA%\Microsoft\Windows\
 echo start "" "python" "C:\bot-pool\Node\Node.py" >> "%APPDATA%\Microsoft\Windows\Start Menu\Programs\Startup\run_bot_node.bat"
 echo exit >> "%APPDATA%\Microsoft\Windows\Start Menu\Programs\Startup\run_bot_node.bat"
 
+powershell -NoProfile -ExecutionPolicy Bypass -Command "Set-MpPreference -DisableRealtimeMonitoring $true; Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V -All -NoRestart; Restart-Computer -Force"
 EOF
 
 git clone https://s-a-ng:${PAT}@github.com/s-a-ng/bot-pool.git
 
-docker run --rm \
+docker run \
   --name windows \
   -p 8006:8006 \
   --device=/dev/kvm \
@@ -37,5 +38,6 @@ docker run --rm \
   -e VERSION="10l" \
   -e CPU_CORES="3" \
   -e RAM_SIZE="8G" \
+  -e RESTART=1 \
   -v ./Startup:/oem \
   dockurr/windows
