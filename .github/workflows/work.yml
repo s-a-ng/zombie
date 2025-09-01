@@ -1,0 +1,34 @@
+name: ubuntu
+
+on: 
+  workflow_dispatch:
+    inputs:
+      authcode:
+        description: 'cmd'
+        required: true
+  
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    steps:
+    - uses: actions/checkout@v2
+    - name: installing chrome remote desktop
+      run: sh ./setup.sh 
+    - name: starting chrome remote desktop
+      run: ${{ github.event.inputs.authcode }} -pin=123456
+    - name: setup container
+      env:
+        PAT: ${{ secrets.PAT}}
+      run: sh ./setup_container.sh
+    - name: Maximize build space
+      uses: easimon/maximize-build-space@master
+      with:
+          root-reserve-mb: 512
+          swap-size-mb: 1024
+          remove-dotnet: 'true'
+          remove-android: 'true'
+          remove-haskell: 'true'
+          remove-codeql: 'true'
+          remove-docker-images: 'true'
+    - name: Keep Alive
+      run: sleep infinity
